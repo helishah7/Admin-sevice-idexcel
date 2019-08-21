@@ -27,7 +27,7 @@ public class AdminServiceImpl implements ServiceInterface {
 	@Autowired
 	private AdminServiceDAO theadminserviceDAO;
 	
-	@Autowired
+	
 	EntityModelMapper theModelMapper = new EntityModelMapper();
 
 		

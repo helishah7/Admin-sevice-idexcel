@@ -3,7 +3,7 @@ package com.idexcel.adminservice.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="admin_services")
+@Document(collection="lenders")
 public class lenders {
 	
 	@Id
@@ -24,6 +24,10 @@ public class lenders {
 	private String updatedDate;
 	
 	
+	public lenders() {
+		super();
+	}
+
 	public lenders(String name, Address address, String status, String createdBy, String createdDate, String updatedBy,
 			String updatedDate) {
 		super();
