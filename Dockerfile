@@ -8,4 +8,5 @@ WORKDIR /usr/local/bin
 
 COPY ./target/admin-service-0.0.1-SNAPSHOT.jar webapp.jar
 
-CMD ["JAVA", "-Dspring.profiles.active=docker-demo", "-war", "webapp.jar"]
+CMD ["JAVA", "-Dspring.profiles.active=docker-demo", "-jar", "webapp.jar"]
+
