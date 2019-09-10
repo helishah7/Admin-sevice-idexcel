@@ -23,21 +23,21 @@ node {
 		}
 	    
 	    stage('Build Docker Image') {
-	    		sh 'docker build -t idexceldemo/admin-service:${BUILD_NUMBER}  -f Dockerfile .'
-	    		sh 'docker tag idexceldemo/admin-service:${BUILD_NUMBER} idexceldemo/admin-service:latest' 
+	    		sh 'docker build -t idexcelinterns/heli:${BUILD_NUMBER}  -f Dockerfile .'
+	    		sh 'docker tag idexcelinterns/heli:${BUILD_NUMBER} idexcelinterns/heli:latest' 
 	    }
 	        
 	    stage('Push Docker Image to Docker Hub') { 
-	    		withCredentials([usernamePassword(credentialsId: 'idexceldemo_dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+	    		withCredentials([usernamePassword(credentialsId: 'dockerhub-heli', passwordVariable: 'admin', usernameVariable: 'admin')]) {
 	    			sh 'docker login -u $user -p $pass' 
 	        		sh 'docker push idexceldemo/admin-service'
 			}	 
 	    }
 	    
 	    stage('Deploy in AWS ECS'){
-            sh 'aws ecs update-service --region us-east-1 --cluster idexceldemo --service admin-service --force-new-deployment'
+            sh 'aws ecs update-service --region us-east-1 --cluster idexceldemo --service heli-admin-service --force-new-deployment'
        		sh 'sleep 30'
-       		sh 'aws ecs wait services-stable --region us-east-1 --cluster idexceldemo --service admin-service'
+       		sh 'aws ecs wait services-stable --region us-east-1 --cluster idexceldemo --service heli-admin-service'
        	}
 	} catch (Exception e) {
 		currentBuild.result = 'FAILURE'
